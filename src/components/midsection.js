@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Signatures from './signatures';
 import SignForm from './sign-form';
-import './style.scss';
+
 import { useStaticQuery, graphql } from "gatsby"
 
-class Midsection extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state.sigData = useStaticQuery(
+
+const Midsection = () => {
+	const data = useStaticQuery(
 			graphql`
 			query GetSignatures {
 				allSignatures {
@@ -20,21 +19,22 @@ class Midsection extends React.Component {
 				}
 			}`
 		);
-	}
-	render() {
+		const [sigData, setSigData] = useState(data.allSignatures.nodes);
+
+
 		return (
 			<section className="section">
 			<div className="container container--small">
 				<h2>Sign here</h2>
 
-				<SignForm></SignForm>
+				<SignForm setSigData={setSigData}></SignForm>
 
 
-				<Signatures sigData={this.state.sigData}></Signatures>
+				<Signatures sigData={sigData}></Signatures>
 
 			</div>
 		</section>
-		)}
-	};
+	)
+}
 
 export default Midsection;

@@ -34,8 +34,9 @@ export default class SignForm extends React.Component {
         })
     }
     addSignature(signatureInfo) {
-        const { time, name, message } = signatureInfo;
-        console.log(time, name, message);
+        const { time, name, message, id } = signatureInfo;
+        this.props.setSigData(oldState => [...oldState, signatureInfo]);
+        console.log(time, name, message, id);
     }
     createSignature = async (sigName, sigMessage) => {
         const queryResponse = await client.query(
@@ -49,7 +50,7 @@ export default class SignForm extends React.Component {
                 }
             )
         )
-        return { time: queryResponse.ts, name: sigName, message: sigMessage }
+        return { time: queryResponse.ts, name: sigName, message: sigMessage, id: queryResponse.id }
     }
 
     render() {

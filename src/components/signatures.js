@@ -1,18 +1,16 @@
 import React from 'react';
 
-import './style.scss';
-import { useStaticQuery, graphql } from "gatsby"
-
 import Signature from './signature'
 
       
 
-const Signatures = () => {
-   
+const Signatures = (props) => {
+    console.log(props)
+
     const SignatureMarkup = () => {
-        return Signatures.allSignatures.nodes.map(signature => {
+        return props.sigData.map((signature, index) => {
             return (
-                <Signature key={signature._id} signature={signature}></Signature>
+                <Signature key={index} signature={signature}></Signature>
             )
         }).reverse()
     }
