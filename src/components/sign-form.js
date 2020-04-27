@@ -1,17 +1,9 @@
 
 import React from 'react';
-
 import './style.scss';
-
 import faunadb, { query as q } from "faunadb"
 
-
-
-
-
 var client = new faunadb.Client({ secret: "fnADpmjHzNACE3RBAwyf6KTohjcyYGI9yJ9wxgME" })
-
-
 
 export default class SignForm extends React.Component {
     state = {
@@ -56,26 +48,35 @@ export default class SignForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-               <label>
-                    Your Name: 
+                <div className="field">
+                    <div className="control">
+                 <label className="label">Label
                     <input 
+                        className="input is-fullwidth"
                         name="sigName" 
                         type="text"
                         value={this.state.sigName}
                         onChange={this.handleInputChange}
                     />
-                </label>
-                <label>
-                    Your Message:
-                    <textarea 
-                        rows="10"
-                        name="sigMessage" 
-                        value={this.state.sigMessage}
-                        onChange={this.handleInputChange}
-                    />
-                </label>
-                <button type="submit">Sign the Guestbook</button>
+                    </label>
+                    </div>
+                </div>
+                <div className="field">
+                    <label>
+                        Your Message:
+                        <textarea 
+                            rows="5"
+                            name="sigMessage" 
+                            value={this.state.sigMessage}
+                            onChange={this.handleInputChange} 
+                            className="textarea" 
+                            placeholder="Leave us a happy note"></textarea>
 
+                    </label>
+                </div>
+                <div className="buttons">
+                    <button className="button is-primary" type="submit">Sign the Guestbook</button>
+                </div>
             </form>
         )
     }
